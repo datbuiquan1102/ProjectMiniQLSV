@@ -38,6 +38,7 @@ public class HuongDanController extends HttpServlet {
 		DeTaiDAO daodt = new DeTaiDAO();
 		List<DeTaiModel> list = daodt.getDTDAO();
 		request.setAttribute("DT_LIST", list);
+		//comment code
 		request.getRequestDispatcher("huongdan.jsp").forward(request, response);
 	}
 
