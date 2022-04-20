@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<%@page import="MODEL.KhoaModel"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="MODEL.DeTaiModel"%>
+<%@page import="MODEL.HuongDanModel"%>
+<%@page import="MODEL.SinhVienModel"%>
 <%@page import="java.util.List"%>
 <html lang="en">
 
@@ -12,7 +15,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Dashboard</title>
+<title>Hưỡng Dẫn</title>
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -23,7 +26,8 @@
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
-<%@page contentType="text/html" pageEncoding="UTF-8" language="java"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 </head>
 
 <body id="page-top">
@@ -63,8 +67,6 @@
 			<div class="sidebar-heading">Interface</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-
-
 			<li class="nav-item"><a class="nav-link" href="khoa"> <i
 					class="fas fa-fw fa-table"></i> <span>Khoa</span></a></li>
 
@@ -89,6 +91,27 @@
 			<!-- Nav Item - Tables -->
 			<li class="nav-item"><a class="nav-link" href="huongdan"> <i
 					class="fas fa-fw fa-table"></i> <span>Hưỡng Dẫn</span></a></li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+
+			<!-- Sidebar Message -->
+			<div class="sidebar-card d-none d-lg-flex">
+				<img class="sidebar-card-illustration mb-2"
+					src="img/undraw_rocket.svg" alt="...">
+				<p class="text-center mb-2">
+					<strong>SB Admin Pro</strong> is packed with premium features,
+					components, and more!
+				</p>
+				<a class="btn btn-success btn-sm"
+					href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
+					Pro!</a>
+			</div>
 
 		</ul>
 		<!-- End of Sidebar -->
@@ -261,19 +284,14 @@
 							</div></li>
 
 						<div class="topbar-divider d-none d-sm-block"></div>
-						<%
 
-						%>
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">
-									<%
-
-									%>
-							</span> <img class="img-profile rounded-circle"
+								class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
+									McGee</span> <img class="img-profile rounded-circle"
 								src="img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
 							<div
@@ -307,135 +325,193 @@
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-						<a href="#"
-							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-							class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+						<h1 class="h3 mb-0 text-gray-800">Hưỡng Dẫn</h1>
 					</div>
 
-					<!-- Content Row ------------------------------------------------------------------------------------------------------->
+					<!-- Content Row -->
 					<div class="row">
+
 						<!-- Earnings (Monthly) Card Example -->
-						<a class="col-xl-3 col-md-6 mb-4" href="dialy.jsp">
+						<a class="col-xl-4 col-md-6 mb-4" href="huongdan">
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												ĐỊA LÝ</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">.</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a> <a class="col-xl-3 col-md-6 mb-4" href="toan.jsp">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												TOÁN</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">.</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a> <a class="col-xl-3 col-md-6 mb-4" href="cnsinhhoc.jsp">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-2">
-												CÔNG NGHỆ SINH HỌC</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">.</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+
+											<div class="h5 mb-0 font-weight-bold text-gray-800">Sinh
+												Viên Đã Nhận Đề Tài</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</a>
+
+						<!-- Earnings (Monthly) Card Example -->
+						<a class="col-xl-4 col-md-6 mb-4" href="huongdan2.jsp">
+							<div class="card border-left-success shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="h5 mb-0 font-weight-bold text-gray-800">Sinh
+												Viên Chưa Nhận Đề Tài</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+
+						<!-- Earnings (Monthly) Card Example -->
+
 					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Họ Tên</th>
+								<th scope="col">Tên Đề Tài</th>
+								<th scope="col">Nơi Thực Tập</th>
+								<th scope="col">Điểm</th>
+								<th scope="col">Đổi Đề Tài</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+							List<HuongDanModel> list = (List<HuongDanModel>) request.getAttribute("HUONGDAN_LIST");
+							for (HuongDanModel hd : list) {
+							%>
+							<tr>
+								<th scope="row">1</th>
+								<td><%=hd.getHotensv()%></td>
+								<td><%=hd.getTendt()%></td>
+								<td><%=hd.getNoithuctap()%></td>
+								<td><%=hd.getKetqua()%></td>
+								<td colspan="2">
+									<button class="btn btn-primary" data-toggle="modal"
+										data-target="#exampleModal"
+										onclick="fillvalueidHD('<%=hd.getHotensv()%>', '<%=hd.getMasv()%>', '<%=hd.getNoithuctap()%>', <%=hd.getKetqua()%>)">
+										Sửa</button>
+								</td>
+							</tr>
+							<%}%>
 
-					<!-- Pending Requests Card Example -->
+						</tbody>
+					</table>
+
+					<!-- Content Row -->
+
+
+
+
+					<!-- /.container-fluid -->
+
 				</div>
-
-				<!-- Content Row -->
+				<!-- End of Main Content -->
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<form class="modal-content" action="hd1" method="post">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Sửa Thông
+									Tin</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">Họ Tên</div>
+							<input value="" type="text"
+								class="form-control" id="modalhoten"
+								aria-describedby="emailHelp" name="hoten">
+							<div class="modal-body">Chọn Đề Tài</div>
+							<select class="form-select form-select-lg mb-3"
+								aria-label=".form-select-lg example" id="modaltendt">
+								<%List<DeTaiModel> listkk = (List<DeTaiModel>) request.getAttribute("DT_LIST");
+								for(DeTaiModel d : listkk){
+								%>
+								<option value="<%=d.getMadt()%>"><%=d.getTendt() %></option>
+								<%} %>
+							</select>
+							<div class="modal-body">Nơi Thực Tập</div>
+							<input value=">" type="text"
+								class="form-control" id="modalnoithuctap"
+								aria-describedby="emailHelp" name="hoten">
+							<div class="modal-body">Kết quả</div>
+							<input value="" type="text"
+								class="form-control" id="modaldiem" aria-describedby="emailHelp"
+								name="hoten">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Đóng</button>
+								<button type="submit" class="btn btn-primary">Lưu</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- Footer -->
+				<footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright &copy; Your Website 2021</span>
+						</div>
+					</div>
+				</footer>
+				<!-- End of Footer -->
 
 			</div>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
-					</div>
-				</div>
-			</footer>
-			<!-- End of Footer -->
+			<!-- End of Content Wrapper -->
 
 		</div>
-		<!-- End of Content Wrapper -->
+		<!-- End of Page Wrapper -->
 
-	</div>
-	<!-- End of Page Wrapper -->
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top"> <i
+			class="fas fa-angle-up"></i>
+		</a>
 
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+		<!-- Logout Modal-->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ready to
+							Leave?</h5>
+						<button class="close" type="button" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">Select "Logout" below if you are
+						ready to end your current session.</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" href="login.html">Logout</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<!-- Bootstrap core JavaScript-->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+		<!-- Core plugin JavaScript-->
+		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
+		<!-- Custom scripts for all pages-->
+		<script src="js/sb-admin-2.min.js"></script>
 
-	<!-- Page level plugins -->
-	<script src="vendor/chart.js/Chart.min.js"></script>
+		<!-- Page level plugins -->
+		<script src="vendor/chart.js/Chart.min.js"></script>
 
-	<!-- Page level custom scripts -->
-	<script src="js/demo/chart-area-demo.js"></script>
-	<script src="js/demo/chart-pie-demo.js"></script>
-
+		<!-- Page level custom scripts -->
+		<script src="js/demo/chart-area-demo.js"></script>
+		<script src="js/demo/chart-pie-demo.js"></script>
+		<script type="text/javascript" src="js/custom.js">
+			
+		</script>
 </body>
 
 </html>

@@ -19,3 +19,18 @@ var fillvalueidHD = (hoten, tendt, noithuctap, diem) =>{
 	document.getElementById("modalnoithuctap").value = noithuctap;
 	document.getElementById("modaldiem").value = diem;
 }
+var fillvalueidGV = (magv, hoten, luong) =>{
+	document.getElementById("modalmagv").value = magv;
+	document.getElementById("modalhoten").value = hoten;
+	document.getElementById("modalluong").value = luong;
+	
+}
+
+var fillvaluebyDT= (madt, tendt, kinhphi, noithuctap) =>{
+	document.getElementById("modalmadt").value = madt;
+	document.getElementById("modaltendt").value = tendt;
+	document.getElementById("modalkinhphi").value = kinhphi;
+	document.getElementById("modalnoithuctap").value = noithuctap;
+	
+}
+

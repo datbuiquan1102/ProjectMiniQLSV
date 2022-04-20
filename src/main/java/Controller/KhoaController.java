@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.GiangVienDAO;
 import DAO.KhoaDAO;
+import MODEL.GiangVienModel;
 import MODEL.KhoaModel;
 
 /**
@@ -32,10 +34,14 @@ public class KhoaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		KhoaDAO dao = new KhoaDAO();
+		KhoaModel km = new KhoaModel();
 		List<KhoaModel> k = new ArrayList<KhoaModel>();
 		k = dao.getKhoaDAO();
 		request.setAttribute("KHOA_LIST", k);
-		request.getRequestDispatcher("dialy.jsp").forward(request, response);
+		GiangVienDAO gvdao = new GiangVienDAO();
+		List<GiangVienModel> listgv = gvdao.getGVInKhoa(km.getMakhoa());
+		request.setAttribute("GVinKHOA", listgv);
+		request.getRequestDispatcher("khoa.jsp").forward(request, response);
 	}
 
 	/**

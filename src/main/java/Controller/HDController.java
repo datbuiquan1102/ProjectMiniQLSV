@@ -6,21 +6,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-import DAO.GiangVienDAO;
-import MODEL.GiangVienModel;
+import DAO.HDDAO;
+import DAO.HuongDanDAO;
+import MODEL.HDModel;
+import MODEL.HuongDanModel;
 
 /**
- * Servlet implementation class GiangVienController
+ * Servlet implementation class HDController
  */
-@WebServlet("/giangvien")
-public class GiangVienController extends HttpServlet {
+@WebServlet("/huong-dan")
+public class HDController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GiangVienController() {
+    public HDController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,9 +32,10 @@ public class GiangVienController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GiangVienDAO dao = new GiangVienDAO();
-		request.setAttribute("GIANGVIEN_LIST", dao.getGVDAO());
-		request.getRequestDispatcher("giangvien.jsp").forward(request, response);
+		HDDAO dao = new HDDAO();
+		List<HDModel> model = dao.getListHD();
+		request.setAttribute("LIST_HD", model);
+		request.getRequestDispatcher("huongdan.jsp").forward(request, response);
 	}
 
 	/**

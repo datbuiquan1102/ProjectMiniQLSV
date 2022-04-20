@@ -321,88 +321,10 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-						<a href="#"
-							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-							class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-					</div>
+				
 
 					<!-- Content Row -->
-					<div class="row">
-
-						<!-- Earnings (Monthly) Card Example -->
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												Earnings (Monthly)</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Earnings (Monthly) Card Example -->
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-success shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-success text-uppercase mb-1">
-												Earnings (Annual)</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Earnings (Monthly) Card Example -->
-						<div class="col-xl-3 col-md-6 mb-4">
-							<div class="card border-left-info shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-											</div>
-											<div class="row no-gutters align-items-center">
-												<div class="col-auto">
-													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-												</div>
-												<div class="col">
-													<div class="progress progress-sm mr-2">
-														<div class="progress-bar bg-info" role="progressbar"
-															style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-															aria-valuemax="100"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Pending Requests Card Example -->
-
-					</div>
+					
 					<table class="table">
 						<thead>
 							<tr>
@@ -410,6 +332,9 @@
 								<th scope="col">Mã GV</th>
 								<th scope="col">Họ Tên</th>
 								<th scope="col">Lương</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -422,7 +347,14 @@
 								<td><%=gv.getMagv()%></td>
 								<td><%=gv.getHoten()%></td>
 								<td><%=gv.getLuong()%></td>
-								<td>Sửa</td>
+								<td colspan="2">
+									<button
+										onclick="fillvalueidGV('<%=gv.getMagv()%>','<%=gv.getHoten()%>','<%=gv.getLuong()%>')"
+										type="button" class="btn btn-primary" data-toggle="modal"
+										data-target="#exampleModal">
+										<a>Sửa</a>
+									</button>
+								</td>
 								<td>Xóa</td>
 							</tr>
 							<%
@@ -430,15 +362,39 @@
 							%>
 						</tbody>
 					</table>
-
-					<!-- Content Row -->
-
-
-
-
-					<!-- /.container-fluid -->
-
 				</div>
+
+
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<form class="modal-content" action="updategv" method="post">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Sửa Thông
+									Tin</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<input value="" type="hidden" class="form-control" id="modalmagv"
+								aria-describedby="emailHelp" name="magv">
+							<div class="modal-body">Họ Tên</div>
+							<input value="" type="text" class="form-control" id="modalhoten"
+								aria-describedby="emailHelp" name="hoten">
+							<div class="modal-body">Lương</div>
+							<input value="" type="text" class="form-control" id="modalluong"
+								aria-describedby="emailHelp" name="luong">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Đóng</button>
+								<button type="submit" class="btn btn-primary">Lưu</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
 				<!-- End of Main Content -->
 
 				<!-- Footer -->
@@ -494,7 +450,7 @@
 		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 		<!-- Custom scripts for all pages-->
-		<script src="js/sb-admin-2.min.js"></script>
+		<script src="js/custom.js"></script>
 
 		<!-- Page level plugins -->
 		<script src="vendor/chart.js/Chart.min.js"></script>

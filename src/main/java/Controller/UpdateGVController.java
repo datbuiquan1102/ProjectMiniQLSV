@@ -11,16 +11,16 @@ import DAO.GiangVienDAO;
 import MODEL.GiangVienModel;
 
 /**
- * Servlet implementation class GiangVienController
+ * Servlet implementation class UpdateGVController
  */
-@WebServlet("/giangvien")
-public class GiangVienController extends HttpServlet {
+@WebServlet("/updategv")
+public class UpdateGVController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GiangVienController() {
+    public UpdateGVController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +29,26 @@ public class GiangVienController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("abc");
 		GiangVienDAO dao = new GiangVienDAO();
-		request.setAttribute("GIANGVIEN_LIST", dao.getGVDAO());
-		request.getRequestDispatcher("giangvien.jsp").forward(request, response);
+		GiangVienModel gv = dao.getGVbyID(id);
+		request.setAttribute("gv", gv);
+		request.getRequestDispatcher("sinhvien.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		GiangVienDAO dao = new GiangVienDAO();
+		String id = request.getParameter("magv");
+		int magv = Integer.parseInt(id);
+		String hoten = request.getParameter("hoten");
+		String l = request.getParameter("luong");
+		double luong = Double.parseDouble(l);
+		dao.UpdateGV(hoten, luong, magv);
+		response.sendRedirect("giangvien");
+		
 	}
 
 }

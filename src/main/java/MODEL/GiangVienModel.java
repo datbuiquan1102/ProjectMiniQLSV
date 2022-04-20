@@ -1,22 +1,21 @@
 package MODEL;
 
 public class GiangVienModel {
-	private Long magv;
+	private long magv;
 	private String hoten;
 	private double luong;
-	private Long makhoa;
+	private long makhoa;
 	
 	public GiangVienModel() {
 		
 	}
-
-	public Long getMagv() {
-		return magv;
-	}
-
-	public void setMagv(Long magv) {
+	public GiangVienModel(long magv, String hoten, double luong) {
 		this.magv = magv;
+		this.hoten = hoten;
+		this.luong = luong;
 	}
+
+
 
 	public String getHoten() {
 		return hoten;
@@ -34,13 +33,25 @@ public class GiangVienModel {
 		this.luong = luong;
 	}
 
-	public Long getMakhoa() {
+
+
+	public long getMagv() {
+		return magv;
+	}
+	public void setMagv(long magv) {
+		this.magv = magv;
+	}
+	public long getMakhoa() {
 		return makhoa;
 	}
-
-	public void setMakhoa(Long makhoa) {
+	public void setMakhoa(long makhoa) {
 		this.makhoa = makhoa;
 	}
+	@Override
+	public String toString() {
+		return "GiangVienModel [magv=" + magv + ", hoten=" + hoten + ", luong=" + luong + ", makhoa=" + makhoa + "]";
+	}
+	
 	
 	
 }

@@ -1,7 +1,7 @@
 package MODEL;
 
 public class KhoaModel {
-	private Long makhoa;
+	private long makhoa;
 	private String tenkhoa;
 	private String dienthoai;
 	
@@ -13,10 +13,11 @@ public class KhoaModel {
 		this.tenkhoa = tenkhoa;
 		this.dienthoai = dienthoai;
 	}
-	public Long getMakhoa() {
+	
+	public long getMakhoa() {
 		return makhoa;
 	}
-	public void setMakhoa(Long makhoa) {
+	public void setMakhoa(long makhoa) {
 		this.makhoa = makhoa;
 	}
 	public String getTenkhoa() {

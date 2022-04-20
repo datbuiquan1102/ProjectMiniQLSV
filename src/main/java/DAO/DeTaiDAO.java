@@ -47,4 +47,34 @@ public class DeTaiDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public DeTaiModel getDetaiByID(String id) {
+		String query = "SELECT * FROM projectpro.tbldetai where Madt = ?";
+		try {
+			ps = con.prepareStatement(query);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				return new DeTaiModel(rs.getLong(1), rs.getString(2), rs.getInt(3), rs.getString(4));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void UpdateDeTai(long madt, String tendt, double kinhphi, String noithuctap) {
+		String query = "UPDATE projectpro.tbldetai SET Tendt = ?, Kinhphi = ?, Noithuctap = ? WHERE Madt = ?";
+		try {
+			ps = con.prepareStatement(query);
+			ps.setString(1, tendt);
+			ps.setDouble(2, kinhphi);
+			ps.setString(3, noithuctap);
+			ps.setLong(4, madt);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

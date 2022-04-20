@@ -114,4 +114,44 @@
     <servlet-name>IdHuongDanController</servlet-name>
     <url-pattern>/IdHuongDanController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HDController</display-name>
+    <servlet-name>HDController</servlet-name>
+    <servlet-class>Controller.HDController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HDController</servlet-name>
+    <url-pattern>/HDController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GVinIdController</display-name>
+    <servlet-name>GVinIdController</servlet-name>
+    <servlet-class>Controller.GVinIdController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GVinIdController</servlet-name>
+    <url-pattern>/GVinIdController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateGVController</display-name>
+    <servlet-name>UpdateGVController</servlet-name>
+    <servlet-class>Controller.UpdateGVController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGVController</servlet-name>
+    <url-pattern>/UpdateGVController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateDetaiController</display-name>
+    <servlet-name>UpdateDetaiController</servlet-name>
+    <servlet-class>Controller.UpdateDetaiController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateDetaiController</servlet-name>
+    <url-pattern>/UpdateDetaiController</url-pattern>
+  </servlet-mapping>
 </web-app>

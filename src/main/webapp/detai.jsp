@@ -329,42 +329,38 @@
 							data-target="#exampleModalCenter">Thêm Đề Tài</button>
 
 						<!-- Modal -->
-						<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-							role="dialog" aria-labelledby="exampleModalCenterTitle"
-							aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document">
-								<form class="modal-content" action="detai" method="post">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLongTitle">Thêm
-											Đề Tài</h5>
-
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<div class="modal-body">Tên Đề Tài</div>
-										<input value="" type="text" class="form-control"
-											id="modaltendt" aria-describedby="emailHelp" name="tendt">
-										<div class="modal-body">Kinh Phí</div>
-										<input value="" type="text" class="form-control"
-											id="modalkinhphi" aria-describedby="emailHelp" name="kinhphi">
-										<div class="modal-body">Nơi Thực Tập</div>
-										<input value="" type="text" class="form-control"
-											id="modalnoithuctap" aria-describedby="emailHelp"
-											name="noithuctap">
-									</div>
-									<div class="modal-footer">
-
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Đóng</button>
-										<button type="submit" class="btn btn-primary">Thêm</button>
-									</div>
-								</form>
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<form class="modal-content" action="updatedetai" method="post">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Sửa Thông
+									Tin</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
-						</div>
+							<input value="" type="text" class="form-control" id="modalmadt"
+								aria-describedby="emailHelp" name="madt">
+							<div class="modal-body">Tên Đề Tài</div>
+							<input value="" type="text" class="form-control" id="modaltendt"
+								aria-describedby="emailHelp" name="tendt">
+							<div class="modal-body">Kinh phí</div>
+							<input value="" type="text" class="form-control" id="modalkinhphi"
+								aria-describedby="emailHelp" name="kinhphi">
+								<div class="modal-body">Nơi Thực Tập</div>
+							<input value="" type="text" class="form-control" id="modalnoithuctap"
+								aria-describedby="emailHelp" name="noithuctap">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Đóng</button>
+								<button type="submit" class="btn btn-primary">Lưu</button>
+							</div>
+						</form>
 					</div>
+				</div>
 
 					<!-- Content Row -->
 
@@ -394,15 +390,50 @@
 							<td><%=dt.getTendt()%></td>
 							<td><%=dt.getKinhphi()%></td>
 							<td><%=dt.getNoithuctap()%></td>
-							<td>Sửa</td>
-							<td>Xóa</td>
+							<td colspan="2">
+								<button onclick="fillvaluebyDT('<%=dt.getMadt()%>','<%=dt.getTendt()%>','<%=dt.getKinhphi() %>','<%=dt.getNoithuctap()%>')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+									<a>Sửa</a>
+								</button>
+							</td>
 						</tr>
 						<%
 						}
 						%>
 					</tbody>
 				</table>
-
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<form class="modal-content" action="updatedetai" method="post">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Sửa Thông
+									Tin</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">Max</div>
+								<input value="" type="hidden" class="form-control" id="modalmadt"
+								aria-describedby="emailHelp" name="madt">
+							<div class="modal-body">Tên Đề Tài</div>
+							<input value="" type="text" class="form-control" id="modaltendt"
+								aria-describedby="emailHelp" name="tendt">
+							<div class="modal-body">Kinh Phí</div>
+							<input value="" type="text" class="form-control" id="modalkinhphi"
+								aria-describedby="emailHelp" name="kinhphi">
+							<div class="modal-body">Nơi Thực Tập</div>
+							<input value="" type="text" class="form-control" id="modalnoithuctap"
+								aria-describedby="emailHelp" name="noithuctap">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Đóng</button>
+								<button type="submit" class="btn btn-primary">Lưu</button>
+							</div>
+						</form>
+					</div>
+				</div>
 				<!-- Content Row -->
 
 
@@ -466,6 +497,7 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="js/sb-admin-2.min.js"></script>
+	<script src="js/custom.js"></script>
 
 	<!-- Page level plugins -->
 	<script src="vendor/chart.js/Chart.min.js"></script>
@@ -473,6 +505,7 @@
 	<!-- Page level custom scripts -->
 	<script src="js/demo/chart-area-demo.js"></script>
 	<script src="js/demo/chart-pie-demo.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
 
 </body>
 

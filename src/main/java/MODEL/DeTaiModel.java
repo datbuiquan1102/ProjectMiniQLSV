@@ -11,6 +11,12 @@ public class DeTaiModel {
 	public DeTaiModel() {
 		
 	}
+	public DeTaiModel(Long madt, String tendt, int kinhphi, String noithuctap) {
+		this.madt = madt;
+		this.tendt = tendt;
+		this.kinhphi = kinhphi;
+		this.noithuctap = noithuctap;
+	}
 
 
 	public Long getMadt() {
@@ -61,9 +67,13 @@ public class DeTaiModel {
 	public void setIs_active(int is_active) {
 		this.is_active = is_active;
 	}
+	@Override
+	public String toString() {
+		return "DeTaiModel [madt=" + madt + ", tendt=" + tendt + ", kinhphi=" + kinhphi + ", noithuctap=" + noithuctap
+				+ ", is_active=" + is_active + "]";
+	}
 	
 	
-
 
 	
 }

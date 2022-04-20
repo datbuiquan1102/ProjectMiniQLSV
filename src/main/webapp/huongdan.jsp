@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="MODEL.HDModel"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="MODEL.DeTaiModel"%>
 <%@page import="MODEL.HuongDanModel"%>
@@ -388,11 +389,13 @@
 								<td colspan="2">
 									<button class="btn btn-primary" data-toggle="modal"
 										data-target="#exampleModal"
-										onclick="fillvalueidHD('<%=hd.getHotensv()%>', '<%=hd.getMa%>', '<%=hd.getNoithuctap()%>', <%=hd.getKetqua()%>)">
+										onclick="fillvalueidHD('<%=hd.getHotensv()%>', '<%=hd.getTendt()%>', '<%=hd.getNoithuctap()%>', <%=hd.getKetqua()%>)">
 										Sửa</button>
 								</td>
 							</tr>
-							<%}%>
+							<%
+							}
+							%>
 
 						</tbody>
 					</table>
@@ -405,12 +408,12 @@
 					<!-- /.container-fluid -->
 
 				</div>
-				<!-- End of Main Content -->
+				End of Main Content
 				<div class="modal fade" id="exampleModal" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
 					<div class="modal-dialog" role="document">
-						<form class="modal-content" action="hd1" method="post">
+						<form class="modal-content" action="hd" method="post">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Sửa Thông
 									Tin</h5>
@@ -420,26 +423,26 @@
 								</button>
 							</div>
 							<div class="modal-body">Họ Tên</div>
-							<input value="" type="text"
-								class="form-control" id="modalhoten"
+							<input value="" type="text" class="form-control" id="modalhoten"
 								aria-describedby="emailHelp" name="hoten">
 							<div class="modal-body">Chọn Đề Tài</div>
 							<select class="form-select form-select-lg mb-3"
 								aria-label=".form-select-lg example" id="modaltendt">
-								<%List<DeTaiModel> listkk = (List<DeTaiModel>) request.getAttribute("DT_LIST");
-								for(DeTaiModel d : listkk){
+								<%
+								List<DeTaiModel> listkk = (List<DeTaiModel>) request.getAttribute("DT_LIST");
+								for (DeTaiModel d : listkk) {
 								%>
-								<option value="<%=d.getMadt()%>"><%=d.getTendt() %></option>
-								<%} %>
+								<option value="<%=d.getMadt()%>"><%=d.getTendt()%></option>
+								<%
+								}
+								%>
 							</select>
 							<div class="modal-body">Nơi Thực Tập</div>
-							<input value=">" type="text"
-								class="form-control" id="modalnoithuctap"
-								aria-describedby="emailHelp" name="hoten">
+							<input value=">" type="text" class="form-control"
+								id="modalnoithuctap" aria-describedby="emailHelp" name="hoten">
 							<div class="modal-body">Kết quả</div>
-							<input value="" type="text"
-								class="form-control" id="modaldiem" aria-describedby="emailHelp"
-								name="hoten">
+							<input value="" type="text" class="form-control" id="modaldiem"
+								aria-describedby="emailHelp" name="hoten">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Đóng</button>
@@ -448,7 +451,7 @@
 						</form>
 					</div>
 				</div>
-				<!-- Footer -->
+				Footer
 				<footer class="sticky-footer bg-white">
 					<div class="container my-auto">
 						<div class="copyright text-center my-auto">

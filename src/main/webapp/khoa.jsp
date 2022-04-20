@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="MODEL.GiangVienModel"%>
 <%@page import="MODEL.KhoaModel"%>
 <%@page import="java.util.List"%>
 <html lang="en">
@@ -269,10 +270,9 @@
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">
-									<%
+								class="mr-2 d-none d-lg-inline text-gray-600 small"> <%
 
-									%>
+ %>
 							</span> <img class="img-profile rounded-circle"
 								src="img/undraw_profile.svg">
 						</a> <!-- Dropdown - User Information -->
@@ -312,65 +312,83 @@
 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 							class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 					</div>
-
 					<!-- Content Row ------------------------------------------------------------------------------------------------------->
-					<div class="row">
-						<!-- Earnings (Monthly) Card Example -->
-						<a class="col-xl-3 col-md-6 mb-4" href="dialy.jsp">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												ĐỊA LÝ</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">.</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a> <a class="col-xl-3 col-md-6 mb-4" href="toan.jsp">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												TOÁN</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">.</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a> <a class="col-xl-3 col-md-6 mb-4" href="cnsinhhoc.jsp">
-							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
-									<div class="row no-gutters align-items-center">
-										<div class="col mr-2">
-											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-2">
-												CÔNG NGHỆ SINH HỌC</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">.</div>
-										</div>
-										<div class="col-auto">
-											<i class="fas fa-calendar fa-2x text-gray-300"></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
+					<div id="accordion">
+						<%
+						List<KhoaModel> list = (List<KhoaModel>) request.getAttribute("KHOA_LIST");
+						for (KhoaModel k : list) {
+						%>
 
-					<!-- Pending Requests Card Example -->
+						<div class="card">
+							<div class="card-header" id="id">
+								<h5 class="mb-0">
+
+									<button class="btn btn-link collapsed" data-toggle="collapse"
+										data-target="#collapseTwo" aria-expanded="false"
+										aria-controls="collapseTwo"><%=k.getTenkhoa()%>
+									</button>
+								</h5>
+							</div>
+							<div id="collapseTwo" class="collapse" aria-labelledby="b"
+								data-parent="#accordion">
+								<div class="card-body">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Mã GV</th>
+												<th scope="col">Tên Giảng Viên</th>
+												<th scope="col">Lương</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<tr>
+												<th scope="row">1</th>
+												<td>a</td>
+												<td>a</td>
+												<td>@mdo</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									<br>
+								</div>
+							</div>
+							<div id="collapseTwo" class="collapse" aria-labelledby="b"
+								data-parent="#accordion">
+								<div class="card-body">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">Mã SV</th>
+												<th scope="col">Họ Tên SV</th>
+												<th scope="col">Năm Sinh</th>
+												<th scope="col">Quê Quán</th>
+												<th scope="col">Chuyển Khoa</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr>
+												<th scope="row">1</th>
+												<td>Mark</td>
+												<td>Otto</td>
+												<td>@mdo</td>
+											</tr>
+										</tbody>
+									</table>
+									<br>
+								</div>
+							</div>
+						</div>
+					</div>
+					<%
+					}
+					%>
 				</div>
 
 				<!-- Content Row -->
+
 
 				<!-- /.container-fluid -->
 
