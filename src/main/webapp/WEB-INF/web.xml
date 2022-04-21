@@ -154,4 +154,14 @@
     <servlet-name>UpdateDetaiController</servlet-name>
     <url-pattern>/UpdateDetaiController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateHDController</display-name>
+    <servlet-name>UpdateHDController</servlet-name>
+    <servlet-class>Controller.UpdateHDController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateHDController</servlet-name>
+    <url-pattern>/UpdateHDController</url-pattern>
+  </servlet-mapping>
 </web-app>

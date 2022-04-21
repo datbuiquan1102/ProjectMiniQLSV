@@ -16,16 +16,20 @@ public class HuongDanDAO {
 	ResultSet rs = null;
 	public List<HuongDanModel> getAllHuongDan(){
 		List<HuongDanModel> list = new ArrayList<HuongDanModel>();
-		String query = "select sv.Hotensv, dt.Tendt, dt.Noithuctap, hd.KetQua from projectpro.tblsinhvien sv join projectpro.tblhuongdan hd on hd.Masv = sv.Masv join projectpro.tbldetai dt on dt.Madt = hd.Madt";
+		String query = "select sv.Masv, hd.Madt, gv.Magv, gv.Hotengv, sv.Hotensv, dt.Tendt, dt.Noithuctap, hd.KetQua from projectpro.tblsinhvien sv join projectpro.tblhuongdan hd on hd.Masv = sv.Masv join projectpro.tbldetai dt on dt.Madt = hd.Madt join projectpro.tblgiangvien gv on gv.Magv = hd.Magv";
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				HuongDanModel model = new HuongDanModel();
-				model.setHotensv(rs.getString(1));
-				model.setTendt(rs.getString(2));
-				model.setNoithuctap(rs.getString(3));
-				model.setKetqua(rs.getDouble(4));
+				model.setMasv(rs.getLong(1));
+				model.setMadt(rs.getLong(2));
+				model.setMagv(rs.getLong(3));
+				model.setTengv(rs.getString(4));;
+				model.setHotensv(rs.getString(5));
+				model.setTendt(rs.getString(6));
+				model.setNoithuctap(rs.getString(7));
+				model.setKetqua(rs.getDouble(8));
 				list.add(model);
 		
 			}
@@ -35,20 +39,19 @@ public class HuongDanDAO {
 		return list;
 	}
 	
-	public HuongDanModel getIdHuongDan(String id) {
+	public HuongDanModel getHuongDanByID(String id) {
 		
-		String query = "select sv.Masv, sv.Hotensv, dt.Tendt, dt.Noithuctap, hd.KetQua from projectpro.tblsinhvien sv join projectpro.tblhuongdan hd on hd.Masv = sv.Masv join projectpro.tbldetai dt on dt.Madt = hd.Madt join projectpro.tblgiangvien gv on gv.Magv = hd.Magv where sv.Masv = ?";
+		String query = "select sv.Masv, hd.Madt, gv.Magv, gv.Hotengv, sv.Hotensv, dt.Tendt, dt.Noithuctap, hd.KetQua from projectpro.tblsinhvien sv join projectpro.tblhuongdan hd on hd.Masv = sv.Masv join projectpro.tbldetai dt on dt.Madt = hd.Madt join projectpro.tblgiangvien gv on gv.Magv = hd.Magv where sv.Masv = ?";
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(1, id);
 			rs = ps.executeQuery();System.out.println("a");
 			while(rs.next()) {
-				return new HuongDanModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5));
+				return new HuongDanModel(rs.getLong(1), rs.getLong(2), rs.getLong(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getDouble(8));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Loi o day");
 		}
 		return null;
 	}

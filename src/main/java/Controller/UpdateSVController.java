@@ -31,11 +31,12 @@ public class UpdateSVController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String masv = request.getParameter("uid");
-		SinhVienDAO dao = new SinhVienDAO();
-		SinhVienModel a = new SinhVienModel();
-		a = dao.getUpdateSV(masv);
-		request.setAttribute("sv", a);
+//		String masv = request.getParameter("sgsdgdsgdsgd");
+//		System.out.println(masv);
+//		SinhVienDAO dao = new SinhVienDAO();
+//		SinhVienModel a = new SinhVienModel();
+//		a = dao.getUpdateSV(masv);
+//		request.setAttribute("sv", a);
 		request.getRequestDispatcher("sinhvien.jsp").forward(request, response);
 	}
 	/**

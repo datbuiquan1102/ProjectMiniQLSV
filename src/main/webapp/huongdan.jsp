@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<%@page import="MODEL.GiangVienModel"%>
+<%@page import="DAO.HuongDanDAO"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="JDBCConnector.CONNDRIVER"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="MODEL.HDModel"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="MODEL.DeTaiModel"%>
@@ -368,7 +374,8 @@
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Họ Tên</th>
+								<th scope="col">GV Hướng Dẫn</th>
+								<th scope="col">Tên SV</th>
 								<th scope="col">Tên Đề Tài</th>
 								<th scope="col">Nơi Thực Tập</th>
 								<th scope="col">Điểm</th>
@@ -382,6 +389,7 @@
 							%>
 							<tr>
 								<th scope="row">1</th>
+								<td><%=hd.getTengv()%></td>
 								<td><%=hd.getHotensv()%></td>
 								<td><%=hd.getTendt()%></td>
 								<td><%=hd.getNoithuctap()%></td>
@@ -389,7 +397,7 @@
 								<td colspan="2">
 									<button class="btn btn-primary" data-toggle="modal"
 										data-target="#exampleModal"
-										onclick="fillvalueidHD('<%=hd.getHotensv()%>', '<%=hd.getTendt()%>', '<%=hd.getNoithuctap()%>', <%=hd.getKetqua()%>)">
+										onclick="fillvalueidHD('<%=hd.getMagv()%>', '<%=hd.getMadt()%>', '<%=hd.getHotensv()%>','<%=hd.getNoithuctap()%>', <%=hd.getKetqua()%>)">
 										Sửa</button>
 								</td>
 							</tr>
@@ -422,24 +430,38 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">Họ Tên</div>
-							<input value="" type="text" class="form-control" id="modalhoten"
-								aria-describedby="emailHelp" name="hoten">
-							<div class="modal-body">Chọn Đề Tài</div>
-							<select class="form-select form-select-lg mb-3"
-								aria-label=".form-select-lg example" id="modaltendt">
-								<%
-								List<DeTaiModel> listkk = (List<DeTaiModel>) request.getAttribute("DT_LIST");
-								for (DeTaiModel d : listkk) {
-								%>
-								<option value="<%=d.getMadt()%>"><%=d.getTendt()%></option>
-								<%
-								}
-								%>
+							
+							<div class="modal-body">GV Hướng Dẫn</div>
+							<select class="form-select form-select-lg mb-3" id="modalmagv" name="magv" aria-label=".form-select-lg example">
+							<%List<GiangVienModel> listGV = (List<GiangVienModel>) request.getAttribute("LIST_GIANGVIEN");
+ 							for (GiangVienModel gv : listGV) {%> 
+								<option value="<%=gv.getMagv()%>"><%=gv.getHoten()%></option>
+								<%} %>
 							</select>
+							
+							
+<!-- 							<input value="" type="text" class="form-control" id="modalgiangvien" -->
+<!-- 								aria-describedby="emailHelp" name="giangvien"> -->
+
+
+							<div class="modal-body">Sinh Viên</div>
+							<input value="" type="text" class="form-control" id="modalsinhvien"
+								aria-describedby="emailHelp" name="sinhvien" readonly="">
+							<div class="modal-body">Chọn Đề Tài</div>
+							
+							<select class="form-select form-select-lg mb-3" id="modalmadt" name="madt" aria-label=".form-select-lg example">
+							<%List<DeTaiModel> l = (List<DeTaiModel>) request.getAttribute("DT_LIST");
+							for (DeTaiModel hd1 : l) {
+							%> 
+								<option value="<%=hd1.getMadt()%>"><%=hd1.getTendt()%></option>
+								<%} %>
+							</select>
+							
+							
+							
 							<div class="modal-body">Nơi Thực Tập</div>
 							<input value=">" type="text" class="form-control"
-								id="modalnoithuctap" aria-describedby="emailHelp" name="hoten">
+								id="modalnoithuctap" aria-describedby="emailHelp" name="hoten" readonly="">
 							<div class="modal-body">Kết quả</div>
 							<input value="" type="text" class="form-control" id="modaldiem"
 								aria-describedby="emailHelp" name="hoten">

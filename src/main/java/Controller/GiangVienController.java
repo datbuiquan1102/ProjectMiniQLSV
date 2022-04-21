@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import DAO.GiangVienDAO;
 import MODEL.GiangVienModel;
@@ -30,7 +31,8 @@ public class GiangVienController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GiangVienDAO dao = new GiangVienDAO();
-		request.setAttribute("GIANGVIEN_LIST", dao.getGVDAO());
+		List<GiangVienModel> list = dao.getGVDAO();
+		request.setAttribute("GIANGVIEN_LIST", list);
 		request.getRequestDispatcher("giangvien.jsp").forward(request, response);
 	}
 

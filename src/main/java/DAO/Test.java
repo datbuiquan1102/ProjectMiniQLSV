@@ -19,8 +19,8 @@ public class Test {
 //		List<GiangVienModel> listgv = gvdao.getGVInKhoa(1001);
 //		System.out.println(listgv);
 
-		GiangVienDAO dao = new GiangVienDAO();
-		GiangVienModel gv = dao.getGVbyID("12");
-		System.out.println(gv);
+		HuongDanDAO dao = new HuongDanDAO();
+		HuongDanModel list = dao.getHuongDanByID("2");
+		System.out.println(list);
 	}
 }

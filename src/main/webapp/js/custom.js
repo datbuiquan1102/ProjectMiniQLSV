@@ -13,9 +13,12 @@ var fillvaluemodal = (masv, hoten, namsinh, quequan) => {
 	document.getElementById("modalquequan").value = quequan;
 }
 
-var fillvalueidHD = (hoten, tendt, noithuctap, diem) =>{
-	document.getElementById("modalhoten").value = hoten;
-	document.getElementById("modaltendt").value = tendt;
+var fillvalueidHD = (magv, madt, sinhvien, noithuctap, diem) =>{
+	document.getElementById("modalmagv").value = magv;
+	document.getElementById("modalmadt").value = madt;
+	console.log("madt",madt);
+	console.log("inp",document.getElementById("modalmadt").value);
+	document.getElementById("modalsinhvien").value = sinhvien;
 	document.getElementById("modalnoithuctap").value = noithuctap;
 	document.getElementById("modaldiem").value = diem;
 }

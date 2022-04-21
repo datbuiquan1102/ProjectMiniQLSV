@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.util.List;
 
 import DAO.DeTaiDAO;
+import DAO.GiangVienDAO;
 import DAO.HuongDanDAO;
 import MODEL.DeTaiModel;
+import MODEL.GiangVienModel;
 import MODEL.HuongDanModel;
 
 /**
@@ -35,9 +37,14 @@ public class HuongDanController extends HttpServlet {
 		HuongDanDAO dao = new HuongDanDAO();
 		List<HuongDanModel> model = dao.getAllHuongDan();
 		request.setAttribute("HUONGDAN_LIST", model);
+		
 		DeTaiDAO daodt = new DeTaiDAO();
 		List<DeTaiModel> list = daodt.getDTDAO();
 		request.setAttribute("DT_LIST", list);
+		
+		GiangVienDAO gvdao = new GiangVienDAO();
+		List<GiangVienModel> listgv = gvdao.getGVDAO();
+		request.setAttribute("LIST_GIANGVIEN", listgv);
 		//comment code
 		request.getRequestDispatcher("huongdan.jsp").forward(request, response);
 	}
