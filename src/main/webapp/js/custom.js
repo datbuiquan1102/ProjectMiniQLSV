@@ -13,7 +13,7 @@ var fillvaluemodal = (masv, hoten, namsinh, quequan) => {
 	document.getElementById("modalquequan").value = quequan;
 }
 
-var fillvalueidHD = (magv, madt, sinhvien, noithuctap, diem) =>{
+var fillvalueidHD = (magv, madt, sinhvien, noithuctap, diem, masv) =>{
 	document.getElementById("modalmagv").value = magv;
 	document.getElementById("modalmadt").value = madt;
 	console.log("madt",madt);
@@ -21,6 +21,7 @@ var fillvalueidHD = (magv, madt, sinhvien, noithuctap, diem) =>{
 	document.getElementById("modalsinhvien").value = sinhvien;
 	document.getElementById("modalnoithuctap").value = noithuctap;
 	document.getElementById("modaldiem").value = diem;
+	document.getElementById("modalmasv").value = masv;
 }
 var fillvalueidGV = (magv, hoten, luong) =>{
 	document.getElementById("modalmagv").value = magv;
@@ -37,3 +38,12 @@ var fillvaluebyDT= (madt, tendt, kinhphi, noithuctap) =>{
 	
 }
 
+
+var fillvalueKhoa = (makhoa) =>{
+	document.getElementById("idmakhoa").value = makhoa;
+}
+
+var fillvalueSVNotExist = (masv, tensv) =>{
+	document.getElementById("modalmasv").value = masv;
+	document.getElementById("modaltensv").value = tensv;
+}

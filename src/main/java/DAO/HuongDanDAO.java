@@ -73,4 +73,35 @@ public class HuongDanDAO {
 		return null;
 		
 	}
+	public void UpdateHD(long magv, long masv, long madt, double ketqua) {
+		String query = "Update tblhuongdan set Madt = ?, Magv = ?, Ketqua = ? where Masv = ?";
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setLong(1, madt);
+			ps.setLong(2, magv);
+			ps.setDouble(3, ketqua);
+			ps.setLong(4, masv);
+		    ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public List<HuongDanModel> getSVNotExistHD(){
+		List<HuongDanModel> list = new ArrayList<HuongDanModel>();
+		String query = "SELECT SV.Masv,SV.Hotensv FROM TBLSinhVien SV WHERE NOT EXISTS(SELECT HD.Masv FROM TBLHuongDan HD WHERE SV.Masv = HD.Masv)";
+		try {
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				HuongDanModel hd = new HuongDanModel();
+				hd.setMasv(rs.getLong(1));
+				hd.setHotensv(rs.getString(2));
+				list.add(hd);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
 }

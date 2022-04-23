@@ -8,19 +8,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import DAO.DeTaiDAO;
 import DAO.GiangVienDAO;
+import DAO.HuongDanDAO;
+import MODEL.DeTaiModel;
 import MODEL.GiangVienModel;
+import MODEL.HuongDanModel;
 
 /**
- * Servlet implementation class GVinIdController
+ * Servlet implementation class SVNotExistsInDTController
  */
-public class GVinIdController extends HttpServlet {
+@WebServlet("/svnotexistsindt")
+public class SVNotExistsInDTController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GVinIdController() {
+    public SVNotExistsInDTController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +34,14 @@ public class GVinIdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		GiangVienDAO dao = new GiangVienDAO();
-//		GiangVienModel model = new GiangVienModel();
-//		List<GiangVienModel> list = dao.getGVInKhoa(model.getMakhoa());
-//		request.setAttribute("GVinKHOA", list);
-//		request.getRequestDispatcher("khoa").forward(request, response);
+		HuongDanDAO dao = new HuongDanDAO();
+		List<HuongDanModel> list = dao.getSVNotExistHD();
+		request.setAttribute("LIST_SVNOTEXIST", list);
+		List<GiangVienModel> listgv = new GiangVienDAO().getGVDAO();
+		request.setAttribute("LIST_GIANGVIEN", listgv);
+		List<DeTaiModel> listdt = new DeTaiDAO().getDTDAO();
+		request.setAttribute("LIST_DETAI", listdt);
+		request.getRequestDispatcher("huongdan2.jsp").forward(request, response);
 	}
 
 	/**

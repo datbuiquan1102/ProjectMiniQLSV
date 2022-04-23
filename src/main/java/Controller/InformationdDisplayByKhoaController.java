@@ -8,20 +8,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import DAO.HuongDanDAO;
-import MODEL.HuongDanModel;
+import DAO.InformationdDisplayByKhoaDAO;
+import MODEL.InformationdDisplayByKhoaModel;
 
 /**
- * Servlet implementation class IdHuongDanController
+ * Servlet implementation class InformationdDisplayByKhoaController
  */
-@WebServlet("/hd")
-public class IdHuongDanController extends HttpServlet {
+@WebServlet("/informationdDisplay")
+public class InformationdDisplayByKhoaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdHuongDanController() {
+    public InformationdDisplayByKhoaController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +30,18 @@ public class IdHuongDanController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String masv = request.getParameter("hdid");
-		HuongDanDAO dao = new HuongDanDAO();
-		HuongDanModel hd = dao.getHuongDanByID(masv);
-		System.out.println(hd);
-		request.setAttribute("hd", hd);
-		request.getRequestDispatcher("huongdan.jsp").forward(request, response);
+        InformationdDisplayByKhoaDAO dao = new InformationdDisplayByKhoaDAO();
+        List<InformationdDisplayByKhoaModel> list = dao.getAllIDByKhoa();
+        request.setAttribute("LIST_INFO", list);
+        request.getRequestDispatcher("khoa.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

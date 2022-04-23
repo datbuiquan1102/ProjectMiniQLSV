@@ -354,7 +354,7 @@
 						</a>
 
 						<!-- Earnings (Monthly) Card Example -->
-						<a class="col-xl-4 col-md-6 mb-4" href="huongdan2.jsp">
+						<a class="col-xl-4 col-md-6 mb-4" href="svnotexistsindt">
 							<div class="card border-left-success shadow h-100 py-2">
 								<div class="card-body">
 									<div class="row no-gutters align-items-center">
@@ -395,9 +395,7 @@
 								<td><%=hd.getNoithuctap()%></td>
 								<td><%=hd.getKetqua()%></td>
 								<td colspan="2">
-									<button class="btn btn-primary" data-toggle="modal"
-										data-target="#exampleModal"
-										onclick="fillvalueidHD('<%=hd.getMagv()%>', '<%=hd.getMadt()%>', '<%=hd.getHotensv()%>','<%=hd.getNoithuctap()%>', <%=hd.getKetqua()%>)">
+									<button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="fillvalueidHD('<%=hd.getMagv()%>', '<%=hd.getMadt()%>', '<%=hd.getHotensv()%>','<%=hd.getNoithuctap()%>', '<%=hd.getKetqua()%>', '<%=hd.getMasv()%>')">
 										Sửa</button>
 								</td>
 							</tr>
@@ -421,7 +419,7 @@
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
 					<div class="modal-dialog" role="document">
-						<form class="modal-content" action="hd" method="post">
+						<form class="modal-content" action="updateHD" method="post">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Sửa Thông
 									Tin</h5>
@@ -430,41 +428,53 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							
+
 							<div class="modal-body">GV Hướng Dẫn</div>
-							<select class="form-select form-select-lg mb-3" id="modalmagv" name="magv" aria-label=".form-select-lg example">
-							<%List<GiangVienModel> listGV = (List<GiangVienModel>) request.getAttribute("LIST_GIANGVIEN");
- 							for (GiangVienModel gv : listGV) {%> 
+							<select class="form-select form-select-lg mb-3" id="modalmagv" name="magv"
+								aria-label=".form-select-lg example">
+								<%
+								List<GiangVienModel> listGV = (List<GiangVienModel>) request.getAttribute("LIST_GIANGVIEN");
+								for (GiangVienModel gv : listGV) {
+								%>
 								<option value="<%=gv.getMagv()%>"><%=gv.getHoten()%></option>
-								<%} %>
+								<%
+								}
+								%>
 							</select>
-							
-							
-<!-- 							<input value="" type="text" class="form-control" id="modalgiangvien" -->
-<!-- 								aria-describedby="emailHelp" name="giangvien"> -->
 
 
+							<!-- 							<input value="" type="text" class="form-control" id="modalgiangvien" -->
+							<!-- 								aria-describedby="emailHelp" name="giangvien"> -->
+							<input value="" type="text" class="form-control"
+								 aria-describedby="emailHelp" id="modalmasv" name="masv"
+								readonly="">
 							<div class="modal-body">Sinh Viên</div>
-							<input value="" type="text" class="form-control" id="modalsinhvien"
-								aria-describedby="emailHelp" name="sinhvien" readonly="">
+							<input value="" type="text" class="form-control"
+								id="modalsinhvien" aria-describedby="emailHelp" name="tensv"
+								readonly="">
 							<div class="modal-body">Chọn Đề Tài</div>
-							
-							<select class="form-select form-select-lg mb-3" id="modalmadt" name="madt" aria-label=".form-select-lg example">
-							<%List<DeTaiModel> l = (List<DeTaiModel>) request.getAttribute("DT_LIST");
-							for (DeTaiModel hd1 : l) {
-							%> 
+
+							<select class="form-select form-select-lg mb-3" id="modalmadt"
+								name="madt" aria-label=".form-select-lg example">
+								<%
+								List<DeTaiModel> l = (List<DeTaiModel>) request.getAttribute("DT_LIST");
+								for (DeTaiModel hd1 : l) {
+								%>
 								<option value="<%=hd1.getMadt()%>"><%=hd1.getTendt()%></option>
-								<%} %>
+								<%
+								}
+								%>
 							</select>
-							
-							
-							
+
+
+
 							<div class="modal-body">Nơi Thực Tập</div>
-							<input value=">" type="text" class="form-control"
-								id="modalnoithuctap" aria-describedby="emailHelp" name="hoten" readonly="">
+							<input value="" type="text" class="form-control"
+								id="modalnoithuctap" aria-describedby="emailHelp"
+								name="noithuctap" readonly="">
 							<div class="modal-body">Kết quả</div>
 							<input value="" type="text" class="form-control" id="modaldiem"
-								aria-describedby="emailHelp" name="hoten">
+								aria-describedby="emailHelp" name="ketqua">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Đóng</button>
@@ -473,14 +483,7 @@
 						</form>
 					</div>
 				</div>
-				Footer
-				<footer class="sticky-footer bg-white">
-					<div class="container my-auto">
-						<div class="copyright text-center my-auto">
-							<span>Copyright &copy; Your Website 2021</span>
-						</div>
-					</div>
-				</footer>
+
 				<!-- End of Footer -->
 
 			</div>

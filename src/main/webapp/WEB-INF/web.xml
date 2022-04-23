@@ -164,4 +164,24 @@
     <servlet-name>UpdateHDController</servlet-name>
     <url-pattern>/UpdateHDController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InformationdDisplayByKhoaController</display-name>
+    <servlet-name>InformationdDisplayByKhoaController</servlet-name>
+    <servlet-class>Controller.InformationdDisplayByKhoaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InformationdDisplayByKhoaController</servlet-name>
+    <url-pattern>/InformationdDisplayByKhoaController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SVNotExistsInDTController</display-name>
+    <servlet-name>SVNotExistsInDTController</servlet-name>
+    <servlet-class>Controller.SVNotExistsInDTController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SVNotExistsInDTController</servlet-name>
+    <url-pattern>/SVNotExistsInDTController</url-pattern>
+  </servlet-mapping>
 </web-app>

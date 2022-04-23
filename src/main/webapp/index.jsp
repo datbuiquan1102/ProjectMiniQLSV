@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-            <a class="nav-link" href="khoa">
+            <a class="nav-link" href="informationdDisplay">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Khoa</span></a>
             </li>

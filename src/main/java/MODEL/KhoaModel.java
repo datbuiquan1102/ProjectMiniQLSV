@@ -3,15 +3,13 @@ package MODEL;
 public class KhoaModel {
 	private long makhoa;
 	private String tenkhoa;
-	private String dienthoai;
 	
 	public KhoaModel() {
 		
 	}
-	public KhoaModel(Long makhoa, String tenkhoa, String dienthoai) {
+	public KhoaModel(Long makhoa, String tenkhoa) {
 		this.makhoa = makhoa;
 		this.tenkhoa = tenkhoa;
-		this.dienthoai = dienthoai;
 	}
 	
 	public long getMakhoa() {
@@ -26,15 +24,9 @@ public class KhoaModel {
 	public void setTenkhoa(String tenkhoa) {
 		this.tenkhoa = tenkhoa;
 	}
-	public String getDienthoai() {
-		return dienthoai;
-	}
-	public void setDienthoai(String dienthoai) {
-		this.dienthoai = dienthoai;
-	}
 	@Override
 	public String toString() {
-		return "KhoaModel [makhoa=" + makhoa + ", tenkhoa=" + tenkhoa + ", dienthoai=" + dienthoai + "]";
+		return "KhoaModel [makhoa=" + makhoa + ", tenkhoa=" + tenkhoa + "]";
 	}
 	
 	

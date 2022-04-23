@@ -39,27 +39,27 @@ public class GiangVienDAO {
 		return list;
 	}
 	
-	public List<GiangVienModel> getGVInKhoa(long makhoa){
-		List<GiangVienModel> list = new ArrayList<GiangVienModel>();
-		String query = "select gv.Magv, gv.Hotengv, gv.Luong, k.Makhoa from projectpro.tblgiangvien gv join projectpro.tblkhoa k on k.Makhoa = gv.Makhoa where k.Makhoa = ?";
-		try {
-			ps = conn.prepareStatement(query);
-			ps.setLong(1, makhoa);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				GiangVienModel gv = new GiangVienModel();
-				gv.setMagv(rs.getLong(1));
-				gv.setHoten(rs.getString(2));
-				gv.setLuong(rs.getDouble(3));
-				gv.setMakhoa(rs.getLong(4));
-				list.add(gv);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
+//	public List<GiangVienModel> getGVInKhoa(long makhoa){
+//		List<GiangVienModel> list = new ArrayList<GiangVienModel>();
+//		String query = "select gv.Magv, gv.Hotengv, gv.Luong, k.Makhoa from projectpro.tblgiangvien gv join projectpro.tblkhoa k on k.Makhoa = gv.Makhoa where k.Makhoa = ?";
+//		try {
+//			ps = conn.prepareStatement(query);
+//			ps.setLong(1, makhoa);
+//			rs = ps.executeQuery();
+//			while(rs.next()) {
+//				GiangVienModel gv = new GiangVienModel();
+//				gv.setMagv(rs.getLong(1));
+//				gv.setHoten(rs.getString(2));
+//				gv.setLuong(rs.getDouble(3));
+//				gv.setMakhoa(rs.getLong(4));
+//				list.add(gv);
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 	
 	public GiangVienModel getGVbyID(String id) {
 		String query =  "select * from projectpro.tblgiangvien where Magv = ?";

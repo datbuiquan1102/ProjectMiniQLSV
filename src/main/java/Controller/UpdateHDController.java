@@ -15,6 +15,7 @@ import MODEL.HuongDanModel;
 /**
  * Servlet implementation class UpdateHDController
  */
+@WebServlet("/updateHD")
 public class UpdateHDController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,8 +42,21 @@ public class UpdateHDController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String gv = request.getParameter("magv");
+		long magv = Long.parseLong(gv);
+		
+		String sv = request.getParameter("masv");
+		long masv = Long.parseLong(sv);
+		
+		String dt = request.getParameter("madt");
+		long madt = Long.parseLong(dt);
+		
+		String kq = request.getParameter("ketqua");
+		double ketqua = Double.parseDouble(kq);
+		
+		HuongDanDAO dao = new HuongDanDAO();
+		dao.UpdateHD(magv, masv, madt, ketqua);
+		response.sendRedirect("huongdan");
 	}
 
 }

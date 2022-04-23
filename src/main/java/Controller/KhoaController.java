@@ -34,13 +34,14 @@ public class KhoaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		KhoaDAO dao = new KhoaDAO();
-		KhoaModel km = new KhoaModel();
-		List<KhoaModel> k = new ArrayList<KhoaModel>();
-		k = dao.getKhoaDAO();
-		request.setAttribute("KHOA_LIST", k);
-		GiangVienDAO gvdao = new GiangVienDAO();
-		List<GiangVienModel> listgv = gvdao.getGVInKhoa(km.getMakhoa());
-		request.setAttribute("GVinKHOA", listgv);
+		KhoaModel khoa = new KhoaModel();
+		List<KhoaModel> listKhoa = dao.getKhoaDAO();
+		request.setAttribute("KHOA_LIST", listKhoa);
+		
+		String makhoa = request.getParameter("makhoa");
+		List<GiangVienModel> listGv = dao.getGVbyIDKhoa(makhoa);
+		request.setAttribute("GV_LIST", listGv);
+		
 		request.getRequestDispatcher("khoa.jsp").forward(request, response);
 	}
 
