@@ -325,223 +325,248 @@
 						<div class="card">
 							<div class="card-header" id="id">
 								<h5 class="mb-0">
-								<%
-					List<InformationdDisplayByKhoaModel> list = (List<InformationdDisplayByKhoaModel>) request.getAttribute("LIST_INFO");
-					for (InformationdDisplayByKhoaModel info : list) {
-					%>
-									<button class="btn btn-link collapsed" data-toggle="collapse"
-										data-target="#collapseTwo" aria-expanded="false"
-										aria-controls="collapseTwo"
-										value="<%=info.getKhoa().getMakhoa()%>" name="makhoa">
-										<%=info.getKhoa().getTenkhoa()%></button>
-										<%} %>
+									<div class="card">
+										<div class="accordion" id="accordionExample">
+											<%
+											List<KhoaModel> list = (List<KhoaModel>) request.getAttribute("LIST_INFO");
+											for (KhoaModel info : list) {
+											%>
+											<div class="card">
+												<div class="card-header"
+													id="headingOne<%=info.getMakhoa()%>">
+													<h2 class="mb-0">
+														<button class="btn btn-link" type="button"
+															data-toggle="collapse"
+															data-target="#collapseOne<%=info.getMakhoa()%>"
+															aria-expanded="true"
+															aria-controls="collapseOne<%=info.getMakhoa()%>">
+															<%=info.getTenkhoa()%>
+														</button>
+													</h2>
+												</div>
+
+												<div id="collapseOne<%=info.getMakhoa()%>" class="collapse"
+													aria-labelledby="headingOne<%=info.getMakhoa()%>"
+													data-parent="#accordionExample">
+													<div class="card-body">
+														<%=info.getTenkhoa()%>
+														<%
+														Connection conn = new CONNDRIVER().getConnec();
+														PreparedStatement ps = null;
+														ResultSet rs = null;
+														String query = "Select distinct gv.Magv, gv.Hotengv, gv.Luong from tblkhoa k join tblgiangvien gv on gv.Makhoa = k.Makhoa where k.Makhoa="
+																+ info.getMakhoa();
+														ps = conn.prepareStatement(query);
+														rs = ps.executeQuery();
+														%>
+														<div class="card-body">
+															<table class="table">
+																<thead>
+																	<tr>
+																		<th scope="col">Mã GV</th>
+																		<th scope="col">Tên Giảng Viên</th>
+																		<th scope="col">Lương</th>
+																		<th scope="col">Chuyển Giảng Viên</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<%
+																	while (rs.next()) {
+																	%>
+																	<tr>
+																		<th scope="row"><%=rs.getLong(1)%></th>
+																		<td><%=rs.getString(2)%></td>
+																		<td><%=rs.getDouble(3)%></td>
+																		<td>
+																			<button type="button" class="btn btn-primary"
+																				data-toggle="modal" data-target="#exampleModal">
+																				Chuyển</button>
+																		</td>
+																	</tr>
+																	<%
+																	}
+																	%>
+																</tbody>
+															</table>
+															<br />
+														</div>
+														<%
+														query = "Select distinct sv.Masv, sv.Hotensv, sv.Namsinh, sv.Quequan from tblkhoa k join tblsinhvien sv on sv.Makhoa = k.Makhoa where k.Makhoa="
+																+ info.getMakhoa();
+														ps = conn.prepareStatement(query);
+														rs = ps.executeQuery();
+														%>
+														<div class="card-body">
+															<table class="table">
+																<thead>
+																	<tr>
+																		<th scope="col">Mã SV</th>
+																		<th scope="col">Họ Tên SV</th>
+																		<th scope="col">Năm Sinh</th>
+																		<th scope="col">Quê Quán</th>
+																		<th scope="col">Chuyển Sinh Viên</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<%
+																	while (rs.next()) {
+																	%>
+																	<tr>
+																		<th scope="row"><%=rs.getLong(1)%></th>
+																		<td><%=rs.getString(2)%></td>
+																		<td><%=rs.getDate(3)%></td>
+																		<td><%=rs.getString(4)%></td>
+																		<td><td>
+																			<button type="button" class="btn btn-primary"
+																				data-toggle="modal" data-target="#a">
+																				Chuyển</button>
+																		</td></td>
+																	</tr>
+																	<%
+																	}
+																	%>
+																</tbody>
+															</table>
+															<br />
+														</div>
+													</div>
+												</div>
+												<%
+												}
+												%>
+											</div>
+										</div>
+									</div>
+
 								</h5>
 
 							</div>
-							<div id="collapseTwo" class="collapse" aria-labelledby="b"
-								data-parent="#accordion">
-								<div class="card-body" name="makhoa">
-									<table class="table">
-										<thead>
-											<tr>
-												<th scope="col">Mã GV</th>
-												<th scope="col">Tên Giảng Viên</th>
-												<th scope="col">Lương</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<th scope="row">1</th>
-												<td>s</td>
 
-											</tr>
-										</tbody>
-									</table>
-									<br>
-								</div>
+
+
+						</div>
+						<!-- Content Row -->
+
+
+						<!-- /.Modal Sinh Vien -->
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<form class="modal-content" action="updateHD" method="post">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Chuyển aaGV Sang Khoa Khác</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+
+									<div class="modal-body">Mã Giảng Viên</div>
+									<input value="" type="text" class="form-control"
+										aria-describedby="emailHelp" name="tensv"> <input
+										value="" type="text" class="form-control" id="modaldiem"
+										aria-describedby="emailHelp" name="ketqua">
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Đóng</button>
+										<button type="submit" class="btn btn-primary">Lưu</button>
+									</div>
+								</form>
 							</div>
-
-							<div id="collapseTwo" class="collapse" aria-labelledby="b"
-								data-parent="#accordion">
-								<div class="container-fluid">
-
-									<!-- Page Heading -->
-									<div
-										class="d-sm-flex align-items-center justify-content-between mb-4">
-										<button type="button" class="btn btn-primary"
-											data-toggle="modalSV" data-target="#exampleModalCenter">Thêm
-											Sinh Viên</button>
-										<!-- Modal -->
-										<div class="modal fade" id="exampleModal" tabindex="-1"
-											role="dialog" aria-labelledby="exampleModalLabel"
-											aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<form class="modal-content" action="updatedetai"
-													method="post">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Thêm Sinh Viên</h5>
-														<button type="button" class="close" data-dismiss="modalSV"
-															aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<input value="" type="text" class="form-control"
-														id="modalmadt" aria-describedby="emailHelp" name="madt">
-													<div class="modal-body">Tên Sinh Viên</div>
-													<input value="" type="text" class="form-control"
-														id="modaltendt" aria-describedby="emailHelp" name="tendt">
-													<div class="modal-body">Năm Sinh</div>
-													<input value="" type="text" class="form-control"
-														id="modalkinhphi" aria-describedby="emailHelp"
-														name="kinhphi">
-													<div class="modal-body">Quê Quán</div>
-													<input value="" type="text" class="form-control"
-														id="modalnoithuctap" aria-describedby="emailHelp"
-														name="noithuctap">
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Đóng</button>
-														<button type="submit" class="btn btn-primary">Lưu</button>
-													</div>
-												</form>
-											</div>
-										</div>
-
-										<!-- Content Row -->
-
-
-										<!-- Pending Requests Card Example -->
-
-
+						</div>
+						
+						<div class="modal fade" id="a" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<form class="modal-content" action="updateHD" method="post">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Chuyển Giảng Viên Sang Khoa Khác</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
 									</div>
-									<div class="card-body">
 
-										<table class="table">
-											<thead>
-												<tr>
-													<th scope="col">Mã SV</th>
-													<th scope="col">Họ Tên SV</th>
-													<th scope="col">Năm Sinh</th>
-													<th scope="col">Quê Quán</th>
-													<th scope="col">Chuyển Khoa</th>
-												</tr>
-											</thead>
-											<tbody>
-
-												<tr>
-													<th scope="row">1</th>
-													<td>3</td>
-
-													<td colspan="2">
-														<button class="btn btn-primary" data-toggle="modal"
-															data-target="#exampleModal">Sửa</button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-										<br>
+									<div class="modal-body">Sinh Viên</div>
+									<input value="" type="text" class="form-control"
+										aria-describedby="emailHelp" name="tensv"> <input
+										value="" type="text" class="form-control" id="modaldiem"
+										aria-describedby="emailHelp" name="ketqua">
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Đóng</button>
+										<button type="submit" class="btn btn-primary">Lưu</button>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 
-
 					</div>
-					<!-- Content Row -->
+					<!-- End of Main Content -->
 
-
-					<!-- /.Modal Sinh Vien -->
-					<div class="modal fade" id="exampleModal" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<form class="modal-content" action="updateHD" method="post">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Thêm Sinh Viên</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-
-								<div class="modal-body">Sinh Viên</div>
-								<input value="" type="text" class="form-control"
-									aria-describedby="emailHelp" name="tensv"> <input
-									value="" type="text" class="form-control" id="modaldiem"
-									aria-describedby="emailHelp" name="ketqua">
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Đóng</button>
-									<button type="submit" class="btn btn-primary">Lưu</button>
-								</div>
-							</form>
+					<!-- Footer -->
+					<footer class="sticky-footer bg-white">
+						<div class="container my-auto">
+							<div class="copyright text-center my-auto">
+								<span>Copyright &copy; Your Website 2021</span>
+							</div>
 						</div>
-					</div>
+					</footer>
+					<!-- End of Footer -->
 
 				</div>
-				<!-- End of Main Content -->
-
-				<!-- Footer -->
-				<footer class="sticky-footer bg-white">
-					<div class="container my-auto">
-						<div class="copyright text-center my-auto">
-							<span>Copyright &copy; Your Website 2021</span>
-						</div>
-					</div>
-				</footer>
-				<!-- End of Footer -->
+				<!-- End of Content Wrapper -->
 
 			</div>
-			<!-- End of Content Wrapper -->
+			<!-- End of Page Wrapper -->
 
-		</div>
-		<!-- End of Page Wrapper -->
+			<!-- Scroll to Top Button-->
+			<a class="scroll-to-top rounded" href="#page-top"> <i
+				class="fas fa-angle-up"></i>
+			</a>
 
-		<!-- Scroll to Top Button-->
-		<a class="scroll-to-top rounded" href="#page-top"> <i
-			class="fas fa-angle-up"></i>
-		</a>
-
-		<!-- Logout Modal-->
-		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Ready to
-							Leave?</h5>
-						<button class="close" type="button" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-body">Select "Logout" below if you are
-						ready to end your current session.</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button"
-							data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
+			<!-- Logout Modal-->
+			<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Ready to
+								Leave?</h5>
+							<button class="close" type="button" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">Select "Logout" below if you are
+							ready to end your current session.</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" type="button"
+								data-dismiss="modal">Cancel</button>
+							<a class="btn btn-primary" href="login.html">Logout</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Bootstrap core JavaScript-->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+			<!-- Bootstrap core JavaScript-->
+			<script src="vendor/jquery/jquery.min.js"></script>
+			<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-		<!-- Core plugin JavaScript-->
-		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+			<!-- Core plugin JavaScript-->
+			<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-		<!-- Custom scripts for all pages-->
-		<script src="js/sb-admin-2.min.js"></script>
+			<!-- Custom scripts for all pages-->
+			<script src="js/sb-admin-2.min.js"></script>
 
-		<!-- Page level plugins -->
-		<script src="vendor/chart.js/Chart.min.js"></script>
+			<!-- Page level plugins -->
+			<script src="vendor/chart.js/Chart.min.js"></script>
 
-		<!-- Page level custom scripts -->
-		<script src="js/demo/chart-area-demo.js"></script>
-		<script src="js/demo/chart-pie-demo.js"></script>
+			<!-- Page level custom scripts -->
+			<script src="js/demo/chart-area-demo.js"></script>
+			<script src="js/demo/chart-pie-demo.js"></script>
 </body>
 
 </html>

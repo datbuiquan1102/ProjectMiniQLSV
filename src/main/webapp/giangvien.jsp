@@ -318,6 +318,7 @@
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
+				<a href="addgv" class="link-primary">Thêm</a>
 				<div class="container-fluid">
 
 					<!-- Page Heading -->

@@ -85,4 +85,21 @@ public class SinhVienDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void getAddSV(String hoten, long makhoa, Date namsinh, String quequan) {
+		String query = "Insert Into projectpro.tblsinhvien (Hotensv, Makhoa,  Namsinh, QueQuan) values (?,?,?,?)";
+		System.out.println(query);
+		try {
+			conn = new CONNDRIVER().getConnec();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, hoten);
+			ps.setLong(2, makhoa);
+			ps.setDate(3, namsinh);
+			ps.setString(4, quequan);
+			ps.executeUpdate();
+			System.out.println("vao day");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

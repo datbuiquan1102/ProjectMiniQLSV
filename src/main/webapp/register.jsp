@@ -43,11 +43,11 @@
                                             placeholder="Fullname" name = "fullname">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                             placeholder="Email" name ="email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputPhone"
+                                    <input type="text" class="form-control form-control-user" id="exampleInputPhone"
                                         placeholder="NumberPhone" name = "sdt">
                                 </div>
                                 <div class="form-group">
@@ -62,10 +62,11 @@
                                  <div class="form-group">
                                     <input type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password" name = "password2">
+                                            <% %>
                                 </div>
-                                <a class="btn btn-primary btn-user btn-block">
+                                <button type="submid" class="btn btn-primary btn-user btn-block">
                                     Đăng Ký
-                                </a>
+                                </button>
                                 <a href="login.jsp" class="btn btn-primary btn-user btn-block">
                                     Quay Lại Trang Chủ
                                 </a>

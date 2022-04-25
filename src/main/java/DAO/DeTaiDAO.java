@@ -14,6 +14,7 @@ public class DeTaiDAO {
 	Connection con = new CONNDRIVER().getConnec();
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	//lấy tất cả dữ liệu của đề tài
 	public List<DeTaiModel> getDTDAO(){
 		List<DeTaiModel> list = new ArrayList<DeTaiModel>();
 		String query = "select * from projectpro.tbldetai";
@@ -34,6 +35,7 @@ public class DeTaiDAO {
 		}
 		return list;
 	}
+	//Thêm Đề tài
 	public void getInsertDetai(String tendetai, int kinhphi, String noithuctap) {
 		String query = "INSERT INTO projectpro.tbldetai (Tendt, Kinhphi, Noithuctap) VALUES (?, ?, ?)";
 		try {
@@ -47,7 +49,7 @@ public class DeTaiDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	//Lấy Id của đề tài
 	public DeTaiModel getDetaiByID(String id) {
 		String query = "SELECT * FROM projectpro.tbldetai where Madt = ?";
 		try {
@@ -63,7 +65,7 @@ public class DeTaiDAO {
 		}
 		return null;
 	}
-	
+	//Sửa Đề tài
 	public void UpdateDeTai(long madt, String tendt, double kinhphi, String noithuctap) {
 		String query = "UPDATE projectpro.tbldetai SET Tendt = ?, Kinhphi = ?, Noithuctap = ? WHERE Madt = ?";
 		try {

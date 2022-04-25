@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import DAO.LoginDao;
 import MODEL.LoginModel;
@@ -24,13 +26,9 @@ public class registerController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("register.jsp").forward(request, response);
 	}
 
 	/**
@@ -44,20 +42,20 @@ public class registerController extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String password2 = request.getParameter("password2");
-		LoginModel login = new LoginDao().CheckLogin(username);
-		if(login == null) {
-			if(password.equals(password2)) {
-				LoginDao dao = new LoginDao();
-				dao.getDangky(fullname, email, numberphone, username, password2);
-				request.setAttribute("mess", "Đăng Kí Thành Công");	
-				request.getRequestDispatcher("dangky").forward(request, response);
+		LoginModel model = new LoginModel(fullname, email, numberphone, username, password2);
+		System.out.println("a");
+		List<LoginModel> list = new ArrayList<LoginModel>();
+		System.out.println("b");
+		for (LoginModel login : list) {
+			System.out.println("c");
+			if(login.getUsername() != null) {
+				if(password.equals(password2)) {
+					LoginDao dao =new LoginDao();
+					dao.getDangky(fullname, email, numberphone, username, password2);
+					request.setAttribute("mess", "Đăng Kí Thành Công");	
+					response.sendRedirect("login");
+				}
 			}
-			else {
-				request.setAttribute("pass", "Nhập Mật Khẩu Không Đúng");
-			}
-		}
-		else {
-			request.setAttribute("uname", "Tài Khoản Đã Đã Tồn Tại");
 		}
 	}
 

@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,5 @@ public class Test {
 //		List<InformationdDisplayByKhoaModel> list = dao.getAllIDByKhoa();
 //		System.out.println(list);
 		
-		HuongDanDAO dao = new HuongDanDAO();
-		List<HuongDanModel> list= dao.getSVNotExistHD();
-		System.out.println(list);
 	}
 }

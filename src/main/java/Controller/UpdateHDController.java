@@ -31,10 +31,6 @@ public class UpdateHDController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HuongDanDAO dao = new HuongDanDAO();
-		String id = request.getParameter("madt");
-		HuongDanModel hd = dao.getHuongDanByID(id);
-		request.setAttribute("hd1", hd);
 		request.getRequestDispatcher("huongdan.jsp").forward(request, response);
 	}
 

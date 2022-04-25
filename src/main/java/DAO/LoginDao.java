@@ -35,11 +35,11 @@ public class LoginDao {
 	public void getDangky(String fullname, String email, int numberphone, String username, String password){
 		try {
 			String query = "INSERT INTO projectpro.login (fullname, email, numberphone, username, password) VALUES (?, ?, ?, ?, ?)";
+			conn = new CONNDRIVER().getConnec();
 			ps = conn.prepareStatement(query);
-			LoginModel login = new LoginModel();
 			ps.setString(1, fullname);
 			ps.setString(2, email);
-			ps.setInt(1, numberphone);
+			ps.setInt(3, numberphone);
 			ps.setString(4, username);
 			ps.setString(5, password);
 			ps.executeUpdate();
@@ -49,22 +49,22 @@ public class LoginDao {
 		}
 	}
 	
-	public LoginModel CheckLogin(String username){
-		try {
-			String query = "select * from projectpro.login where username = ?";
-			ps = conn.prepareStatement(query);
-			LoginModel login = new LoginModel();
-			ps.setString(1, username);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				while(rs.next()) {
-					return new LoginModel(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-				}
-			}
-			
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return null;
-	}
+//	public LoginModel CheckLogin(String username){
+//		try {
+//			String query = "select * from projectpro.login where username = ?";
+//			ps = conn.prepareStatement(query);
+//			LoginModel login = new LoginModel();
+//			ps.setString(1, username);
+//			rs = ps.executeQuery();
+//			while(rs.next()) {
+//				while(rs.next()) {
+//					return new LoginModel(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+//				}
+//			}
+//			
+//		} catch (Exception e) {
+//			e.getMessage();
+//		}
+//		return null;
+//	}
 }

@@ -184,4 +184,34 @@
     <servlet-name>SVNotExistsInDTController</servlet-name>
     <url-pattern>/SVNotExistsInDTController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddSVController</display-name>
+    <servlet-name>AddSVController</servlet-name>
+    <servlet-class>Controller.AddSVController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddSVController</servlet-name>
+    <url-pattern>/AddSVController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddGiangVien</display-name>
+    <servlet-name>AddGiangVien</servlet-name>
+    <servlet-class>Controller.AddGiangVien</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddGiangVien</servlet-name>
+    <url-pattern>/AddGiangVien</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateSVNotExitHDController</display-name>
+    <servlet-name>UpdateSVNotExitHDController</servlet-name>
+    <servlet-class>Controller.UpdateSVNotExitHDController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateSVNotExitHDController</servlet-name>
+    <url-pattern>/UpdateSVNotExitHDController</url-pattern>
+  </servlet-mapping>
 </web-app>

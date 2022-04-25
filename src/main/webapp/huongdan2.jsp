@@ -403,7 +403,7 @@
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
 					<div class="modal-dialog" role="document">
-						<form class="modal-content" action="updateHD" method="post">
+						<form class="modal-content" action="svnotexistsindt" method="post">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Thêm Giáo Viên Hướng Dẫn</h5>
 								<button type="button" class="close" data-dismiss="modal"

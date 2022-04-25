@@ -14,6 +14,8 @@ public class GiangVienDAO {
 	Connection conn = new CONNDRIVER().getConnec();
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	
+	//Lấy dữ liệu của bảng Giảng Viên
 	public List<GiangVienModel> getGVDAO(){
 		List<GiangVienModel> list = new ArrayList<GiangVienModel>();
 
@@ -32,9 +34,7 @@ public class GiangVienDAO {
 				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("quan que");
 		}
 		return list;
 	}
@@ -60,10 +60,9 @@ public class GiangVienDAO {
 //		}
 //		return list;
 //	}
-	
+	//Lấy id của từng giảng viên
 	public GiangVienModel getGVbyID(String id) {
 		String query =  "select * from projectpro.tblgiangvien where Magv = ?";
-		System.out.println(query);
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setString(0, id);
@@ -73,12 +72,11 @@ public class GiangVienDAO {
 				return new GiangVienModel(rs.getLong(1), rs.getString(2), rs.getDouble(3));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+	//Cập nhập thông tin giảng viên
 	public void UpdateGV(String hoten, double luong, long magv) {
 		String query = "UPDATE projectpro.tblgiangvien SET Hotengv = ?,Luong = ? WHERE Magv = ?";
 		try {
@@ -86,6 +84,19 @@ public class GiangVienDAO {
 			ps.setString(1, hoten);
 			ps.setDouble(2, luong);
 			ps.setLong(3, magv);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	// Thêm giảng viên theo khoa
+	public void getAdd(String hoten, double luong, long makhoa) {
+		String query = "insert Into projectpro.tblgiangvien (Hotengv, Luong, Makhoa) values(?,?,?)";
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setString(1, hoten);
+			ps.setDouble(2, luong);
+			ps.setLong(3, makhoa);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception

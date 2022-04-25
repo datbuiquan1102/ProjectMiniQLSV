@@ -14,6 +14,7 @@ public class HuongDanDAO {
 	Connection conn = new CONNDRIVER().getConnec();
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	//Sinh viên đã nhận đề tài và có giảng viên hướng dẫn
 	public List<HuongDanModel> getAllHuongDan(){
 		List<HuongDanModel> list = new ArrayList<HuongDanModel>();
 		String query = "select sv.Masv, hd.Madt, gv.Magv, gv.Hotengv, sv.Hotensv, dt.Tendt, dt.Noithuctap, hd.KetQua from projectpro.tblsinhvien sv join projectpro.tblhuongdan hd on hd.Masv = sv.Masv join projectpro.tbldetai dt on dt.Madt = hd.Madt join projectpro.tblgiangvien gv on gv.Magv = hd.Magv";
@@ -38,7 +39,7 @@ public class HuongDanDAO {
 		}
 		return list;
 	}
-	
+	//lấy id của sinh viên đã nhận đề tài
 	public HuongDanModel getHuongDanByID(String id) {
 		
 		String query = "select sv.Masv, hd.Madt, gv.Magv, gv.Hotengv, sv.Hotensv, dt.Tendt, dt.Noithuctap, hd.KetQua from projectpro.tblsinhvien sv join projectpro.tblhuongdan hd on hd.Masv = sv.Masv join projectpro.tbldetai dt on dt.Madt = hd.Madt join projectpro.tblgiangvien gv on gv.Magv = hd.Magv where sv.Masv = ?";
@@ -55,8 +56,10 @@ public class HuongDanDAO {
 		}
 		return null;
 	}
+	
+	
 	public List<HuongDanModel> getChuaNhanDT(String id) {
-		String query = "select sv.Masv, sv.Hotensv from projectpro.tblsinhvien sv where NOT exists(select hd.Magv from projectpro.tblhuongdan hd where ? = ?)";
+		String query = "select sv.Masv, sv.Hotensv from projectpro.tblsinhvien sv where NOT exists(select hd.Magv from projectpro.tblhuongdan hd where sv.Masv = ?)";
 		List<HuongDanModel> list = new ArrayList<HuongDanModel>();
 		try {
 			ps = conn.prepareStatement(query);
@@ -70,9 +73,10 @@ public class HuongDanDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 		
 	}
+	// Đổi đề tài và đổi giảng viên hưỡng dẫn cho sinh viên
 	public void UpdateHD(long magv, long masv, long madt, double ketqua) {
 		String query = "Update tblhuongdan set Madt = ?, Magv = ?, Ketqua = ? where Masv = ?";
 		try {
@@ -86,7 +90,7 @@ public class HuongDanDAO {
 			// TODO: handle exception
 		}
 	}
-	
+	//Những sinh viên chưa nhận đề tài
 	public List<HuongDanModel> getSVNotExistHD(){
 		List<HuongDanModel> list = new ArrayList<HuongDanModel>();
 		String query = "SELECT SV.Masv,SV.Hotensv FROM TBLSinhVien SV WHERE NOT EXISTS(SELECT HD.Masv FROM TBLHuongDan HD WHERE SV.Masv = HD.Masv)";
@@ -103,5 +107,20 @@ public class HuongDanDAO {
 			System.out.println(e.getMessage());
 		}
 		return list;
+	}
+	
+	//Thêm đề tài cho các sinh viên chưa có đề tài
+	public void getUpdateDTbySV(Long masv, long madt, long magv, double ketqua) {
+		String query = "insert into projectpro.tblhuongdan (Masv, Madt, Magv, KetQua) values (?,?,?,?)";
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setLong(1, masv);
+			ps.setLong(2, madt);
+			ps.setLong(3, magv);
+			ps.setDouble(4, ketqua);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
