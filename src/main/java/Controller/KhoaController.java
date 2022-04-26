@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +37,13 @@ public class KhoaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		KhoaDAO dao = new KhoaDAO();
 		KhoaModel khoa = new KhoaModel();
+		HttpSession ss = request.getSession();
 		List<KhoaModel> listKhoa = dao.getKhoaDAO();
-		request.setAttribute("KHOA_LIST", listKhoa);
+		ss.setAttribute("KHOA_LIST", listKhoa);
 		
 		String makhoa = request.getParameter("makhoa");
 		List<GiangVienModel> listGv = dao.getGVbyIDKhoa(makhoa);
-		request.setAttribute("GV_LIST", listGv);
+		ss.setAttribute("GV_LIST", listGv);
 		
 		request.getRequestDispatcher("khoa.jsp").forward(request, response);
 	}
@@ -49,8 +52,7 @@ public class KhoaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

@@ -354,7 +354,7 @@
 														Connection conn = new CONNDRIVER().getConnec();
 														PreparedStatement ps = null;
 														ResultSet rs = null;
-														String query = "Select distinct gv.Magv, gv.Hotengv, gv.Luong from tblkhoa k join tblgiangvien gv on gv.Makhoa = k.Makhoa where k.Makhoa="
+														String query = "Select distinct gv.Magv, gv.Hotengv, gv.Luong, gv.Makhoa from tblkhoa k join tblgiangvien gv on gv.Makhoa = k.Makhoa where k.Makhoa="
 																+ info.getMakhoa();
 														ps = conn.prepareStatement(query);
 														rs = ps.executeQuery();
@@ -367,6 +367,12 @@
 																		<th scope="col">Tên Giảng Viên</th>
 																		<th scope="col">Lương</th>
 																		<th scope="col">Chuyển Giảng Viên</th>
+																		<th><a class="col-xl-4 col-md-6 mb-4"
+																			href="addsv">																				
+																				<div class="h4 mb-0 font-weight-bold text-gray-600">Thêm
+																						Giảng Viên</div>
+																		</a></th>
+
 																	</tr>
 																</thead>
 																<tbody>
@@ -379,7 +385,8 @@
 																		<td><%=rs.getDouble(3)%></td>
 																		<td>
 																			<button type="button" class="btn btn-primary"
-																				data-toggle="modal" data-target="#exampleModal">
+																				data-toggle="modal" data-target="#exampleModal"
+																				onclick="fillvaluegvbykhoa('<%=rs.getLong(1)%>','<%=rs.getString(2)%>', '<%=rs.getDouble(3)%>', '<%=rs.getLong(4)%>')">
 																				Chuyển</button>
 																		</td>
 																	</tr>
@@ -391,7 +398,7 @@
 															<br />
 														</div>
 														<%
-														query = "Select distinct sv.Masv, sv.Hotensv, sv.Namsinh, sv.Quequan from tblkhoa k join tblsinhvien sv on sv.Makhoa = k.Makhoa where k.Makhoa="
+														query = "Select distinct sv.Masv, sv.Hotensv, sv.Namsinh, sv.Quequan, sv.Makhoa from tblkhoa k join tblsinhvien sv on sv.Makhoa = k.Makhoa where k.Makhoa="
 																+ info.getMakhoa();
 														ps = conn.prepareStatement(query);
 														rs = ps.executeQuery();
@@ -405,6 +412,11 @@
 																		<th scope="col">Năm Sinh</th>
 																		<th scope="col">Quê Quán</th>
 																		<th scope="col">Chuyển Sinh Viên</th>
+																		<th><a class="col-xl-4 col-md-6 mb-4"
+																			href="addgv">																				
+																				<div class="h4 mb-0 font-weight-bold text-gray-600">Thêm
+																						Giảng Viên</div>
+																		</a></th>
 																	</tr>
 																</thead>
 																<tbody>
@@ -416,11 +428,14 @@
 																		<td><%=rs.getString(2)%></td>
 																		<td><%=rs.getDate(3)%></td>
 																		<td><%=rs.getString(4)%></td>
-																		<td><td>
+																		<td>
+																		<td>
 																			<button type="button" class="btn btn-primary"
-																				data-toggle="modal" data-target="#a">
+																				data-toggle="modal" data-target="#a"
+																				onclick="fillvaluesvbykhoa('<%=rs.getLong(1)%>','<%=rs.getString(2)%>','<%=rs.getDate(3)%>','<%=rs.getString(4)%>','<%=rs.getLong(5)%>')">
 																				Chuyển</button>
-																		</td></td>
+																		</td>
+																		</td>
 																	</tr>
 																	<%
 																	}
@@ -453,20 +468,39 @@
 							role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
 							<div class="modal-dialog" role="document">
-								<form class="modal-content" action="updateHD" method="post">
+								<form class="modal-content" action="informationdDisplay"
+									method="post">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Chuyển aaGV Sang Khoa Khác</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Chuyển
+											Giảng Viên Sang Khoa Khác</h5>
 										<button type="button" class="close" data-dismiss="modal"
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 
-									<div class="modal-body">Mã Giảng Viên</div>
 									<input value="" type="text" class="form-control"
-										aria-describedby="emailHelp" name="tensv"> <input
-										value="" type="text" class="form-control" id="modaldiem"
-										aria-describedby="emailHelp" name="ketqua">
+										aria-describedby="emailHelp" name="magv" id="modalmagv"
+										hidden="" readonly="">
+									<div class="modal-body">Họ Tên Giảng Viên</div>
+									<input value="" type="text" class="form-control"
+										aria-describedby="emailHelp" name="tensv" id="modaltengv">
+									<input value="" type="text" class="form-control"
+										aria-describedby="emailHelp" name="tensv" id="modalluong"
+										hidden="">
+									<div class="modal-body">Chuyển Sang Khoa</div>
+									<select class="form-select form-select-lg mb-3"
+										id="modalmakhoa" name="makhoa"
+										aria-label=".form-select-lg example">
+										<%
+										List<KhoaModel> k = (List<KhoaModel>) request.getAttribute("LIST_INFO");
+										for (KhoaModel hd1 : k) {
+										%>
+										<option value="<%=hd1.getMakhoa()%>"><%=hd1.getTenkhoa()%></option>
+										<%
+										}
+										%>
+									</select>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Đóng</button>
@@ -475,25 +509,44 @@
 								</form>
 							</div>
 						</div>
-						
-						<div class="modal fade" id="a" tabindex="-1"
-							role="dialog" aria-labelledby="exampleModalLabel"
-							aria-hidden="true">
+
+						<div class="modal fade" id="a" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
-								<form class="modal-content" action="updateHD" method="post">
+								<form class="modal-content" action="informationdDisplay"
+									method="post">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Chuyển Giảng Viên Sang Khoa Khác</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Chuyển
+											Sinh Viên Sang Khoa Khác</h5>
 										<button type="button" class="close" data-dismiss="modal"
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 
-									<div class="modal-body">Sinh Viên</div>
 									<input value="" type="text" class="form-control"
-										aria-describedby="emailHelp" name="tensv"> <input
-										value="" type="text" class="form-control" id="modaldiem"
-										aria-describedby="emailHelp" name="ketqua">
+										aria-describedby="emailHelp" name="masv" id="modalmasv"
+										hidden="">
+									<div class="modal-body">Họ Tên</div>
+									<input value="" type="text" class="form-control"
+										aria-describedby="emailHelp" name="tensv" id="modalhotensv">
+									<input value="" type="text" class="form-control"
+										aria-describedby="emailHelp" name="tensv" id="modalnamsinh"
+										hidden=""> <input value="" type="text"
+										class="form-control" aria-describedby="emailHelp" name="tensv"
+										id="modalquequan" hidden="">
+									<div class="modal-body">Chuyển Sang Khoa</div>
+									<select class="form-select form-select-lg mb-3"
+										id="modalmakhoa2" name="makhoa"
+										aria-label=".form-select-lg example">
+										<%
+										for (KhoaModel hd1 : k) {
+										%>
+										<option value="<%=hd1.getMakhoa()%>"><%=hd1.getTenkhoa()%></option>
+										<%
+										}
+										%>
+									</select>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Đóng</button>
@@ -504,17 +557,6 @@
 						</div>
 
 					</div>
-					<!-- End of Main Content -->
-
-					<!-- Footer -->
-					<footer class="sticky-footer bg-white">
-						<div class="container my-auto">
-							<div class="copyright text-center my-auto">
-								<span>Copyright &copy; Your Website 2021</span>
-							</div>
-						</div>
-					</footer>
-					<!-- End of Footer -->
 
 				</div>
 				<!-- End of Content Wrapper -->
@@ -567,6 +609,7 @@
 			<!-- Page level custom scripts -->
 			<script src="js/demo/chart-area-demo.js"></script>
 			<script src="js/demo/chart-pie-demo.js"></script>
+			<script type="text/javascript" src="js/custom.js"></script>
 </body>
 
 </html>

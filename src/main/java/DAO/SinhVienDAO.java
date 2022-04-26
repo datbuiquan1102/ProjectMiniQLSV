@@ -102,4 +102,17 @@ public class SinhVienDAO {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	public void getDataMigration(String masv, String makhoa) {
+		String query = "Update projectpro.tblsinhvien set Makhoa = ? where Masv = ?";
+		try {
+			conn = new CONNDRIVER().getConnec();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, makhoa);
+			ps.setString(2, masv);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

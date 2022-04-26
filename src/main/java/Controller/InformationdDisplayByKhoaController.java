@@ -5,10 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
+import DAO.GiangVienDAO;
 import DAO.InformationdDisplayByKhoaDAO;
+import DAO.SinhVienDAO;
 import MODEL.InformationdDisplayByKhoaModel;
 import MODEL.KhoaModel;
 
@@ -41,8 +45,18 @@ public class InformationdDisplayByKhoaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String masv  = request.getParameter("masv");
+		String makhoa = request.getParameter("makhoa");
+//		long MASV = Long.parseLong(masv);
+//		long MAKHOA = Long.parseLong(makhoa);
+		SinhVienDAO svdao = new SinhVienDAO();
+		svdao.getDataMigration(masv, makhoa);
+		
+		String magv = request.getParameter("magv");
+//		String makhoagv = request.getParameter("makhoagv");
+		GiangVienDAO dao = new GiangVienDAO();
+		dao.getDataMigration(magv, makhoa);
+		response.sendRedirect("informationdDisplay");
 	}
 
 }
